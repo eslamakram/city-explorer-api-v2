@@ -2,12 +2,12 @@
 const express = require('express');
 const server = express();
 const cors = require('cors');
-const axios = require('axios');
 require('dotenv').config();
 server.use(cors());
 const PORT = process.env.PORT;
 const forecastController=require("./controllers/Forecast.controller");
 const movieController=require("./controllers/Movie.controller");
+const weatherController = require("./controllers/Weather.controller")
 
 // test port with / endpoint
 server.get('/', (req, res) => {
@@ -15,11 +15,24 @@ server.get('/', (req, res) => {
 });
 
 
+server.get('/localweather', weatherController);
 server.get('/weather', forecastController);
 server.get('/movie',movieController);
 
 // put a listener to server takes port and callback 
 server.listen(PORT, () => { console.log(`listening to port ${PORT}`) });
+
+
+
+
+
+
+
+
+
+
+
+
 
 //.......................... weather api..............
 

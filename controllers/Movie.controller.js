@@ -1,5 +1,7 @@
 "use strict";
 const Movie = require("../models/Movie.model");
+const axios = require('axios');
+
 
 const movieController=  async (req, res)=>{
         let url = `https://api.themoviedb.org/3/movie/550?api_key=${process.env.MOVIE_API_KEY}`;

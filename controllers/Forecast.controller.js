@@ -1,5 +1,7 @@
 "use strict";
 const ForeCast = require("../models/ForeCast.model");
+const axios = require('axios');
+
 
 const forecastController=  async (req, res) => {
     let city_name = req.query.searchQuery;
