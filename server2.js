@@ -1,8 +1,14 @@
-"use strict";
-const weatherData = require('../data/weather.json');
-const ForeCast = require("../models/ForeCast.model");
+'use strict'
+const express = require('express');
+const server = express();
+const cors = require('cors');
+require('dotenv').config();
+server.use(cors());
+const PORT = process.env.PORT;
+const weatherData = require('./data/weather.json');
 
-const weatherController = (req,res) => {
+
+server.get('/localweather',(req,res) => {
     let lat = Number(req.query.lat);
     let lon = Number(req.query.lon);
     let searchQuery = [];
@@ -25,12 +31,19 @@ const weatherController = (req,res) => {
             
         });
   
-     res.status(200).json(forecastDays); 
+     res.json(forecastDays); 
       
      } else{
     res.status(500).send('invalid entry!');
 }
 
+});
+
+class ForeCast{
+    constructor(date, description){
+        this.date = date;
+        this.description = description;
+   }
 }
 
-module.exports=weatherController;
+server.listen(PORT, () => { console.log(`listening to port ${PORT}`) });
